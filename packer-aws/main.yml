@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  sudo: yes
+  tasks:
+
+  -  name: Install list of packages
+     yum: name={{item}} state=installed
+     with_items:
+     - htop
+     - screen
+     - unzip
+     - curl
+     - sudo
+     - mtr
+     - bash-completion
