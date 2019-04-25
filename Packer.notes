@@ -1,0 +1,53 @@
+PACKER notes
+
+
+
+Basic skeleton of the packer is 
+{
+"builders" : [],
+"provisioners" : [],
+"post-processor" : []
+}
+
+
+User variable: User variables are used to parameterised packer configuration file template so we can keep secret, environment variables and other parameters out of the template. They help with the portability of configuration file. They help to separate out the part which can be modified in our template. Variables can be passed through command lines, environment variables, Vault or files. The variable section is a key value mapping with the variable name assigned to a default value.
+
+Builder: Builders section contains a list of builders that packer uses to generate a machine image. Builders are responsible for creating an instance and generating machine images from them. A builder maps to a single machine image. Builder contains information including type which is the name of the builder, access keys which builder require to connect to the platform like AWS.
+
+Provisioners: Provisioners section contains a list of provisioners that packer use to install and configure software with in running instance before creating a machine image. Provisioners are optional. Provisioner contains type which specifies the name of provisioner like Shell, Ansible etc.
+
+
+
+
+
+Packer supports the following provisioners.
+1. Ansible
+2. Chef
+3. Salt
+4. Shell
+5. Powershell
+6. Windows cmd
+7. File — For copying file from local directory to VM image.
+
+
+shell provisioner
+{
+  "type": "shell",
+  "inline": [
+    "sudo apt-get install -y git",
+    "ssh-keyscan github.com >> ~/.ssh/known_hosts",
+    "git clone git@github.com:exampleorg/myprivaterepo.git"
+  ]
+}
+
+
+
+
+validate packer  code
+root@multipurpose:~/amazon-keys# packer validate centos-nginx.json
+Template validated successfully.
+root@multipurpose:~/amazon-keys#
+
+Building the packer code
+packer build -var-file=vars.json baseAMI.json
+packer build -var 'access_key=AKIAVNRFOTFIRUXZWRORXXXX' -var 'secret_key=GrIMFaSm64sccsLGvHGbyrBb17on4KNNIw5UYYd7XXXX' centos-nginx.json
