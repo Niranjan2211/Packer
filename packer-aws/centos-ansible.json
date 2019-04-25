@@ -2,8 +2,8 @@
     "variables": {
       "name": "centos_7_nginx",
       "source_ami": "ami-0009e88f05cf1087c",
-      "access_key":"AKIAVNRFOTFIRUXZWROR",
-      "secret_key":"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",
+      "access_key":"XXXXXXXXXXXXXXXXXXXXXX",
+      "secret_key":"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
       "region":"ap-south-1"
     },
     "builders": [{
